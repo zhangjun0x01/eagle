@@ -4,7 +4,7 @@ CREATE TABLE `log_rule` (
   `app_id` varchar(128) NOT NULL COMMENT 'app id',
   `version` varchar(128) NOT NULL COMMENT '版本',
   `type` varchar(64) NOT NULL COMMENT '规则类型',
-  `script` varchar(20480) NOT NULL COMMENT '规则',
+  `script` TEXT NOT NULL COMMENT '规则',
   `state` int(11) NOT NULL COMMENT '状态 1有效 0无效',
   `update_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '最后更新时间',
   PRIMARY KEY (`id`),

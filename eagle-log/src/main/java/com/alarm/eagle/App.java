@@ -49,11 +49,12 @@ public class App {
             DataStream<LogEntry> dataSource = getKafkaDataSource(parameter, env);
             BroadcastStream<RuleBase> ruleSource = getRuleDataSource(parameter, env);
             SingleOutputStreamOperator<LogEntry> processedStream = processLogStream(parameter, dataSource, ruleSource);
-            sinkToRedis(parameter, processedStream);
-            sinkToElasticsearch(parameter, processedStream);
+            processedStream.print();
+//            sinkToRedis(parameter, processedStream);
+//            sinkToElasticsearch(parameter, processedStream);
 
-            DataStream<LogEntry> kafkaOutputStream = processedStream.getSideOutput(Descriptors.kafkaOutputTag);
-            sinkLogToKafka(parameter, kafkaOutputStream);
+//            DataStream<LogEntry> kafkaOutputStream = processedStream.getSideOutput(Descriptors.kafkaOutputTag);
+//            sinkLogToKafka(parameter, kafkaOutputStream);
 
             env.getConfig().setGlobalJobParameters(parameter);
             env.execute("eagle-log");
